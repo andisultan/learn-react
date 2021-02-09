@@ -1,13 +1,28 @@
+import { useEffect } from 'react'
 import { connect } from 'react-redux';
 import Button from 'components/button';
-import { articleAdd } from './redux/actions/articles'
+import Container from 'components/container';
+import Section from 'components/section';
+import { articleFetch, articleAdd } from './redux/actions/articles'
 
-const App = ({ articleAdd, articles }) => {
+const App = ({ articleFetch, articleAdd, articles }) => {
+  
+  useEffect(() => {
+    articleFetch();
+  });
+
   return (
-    <div>
-      State Pertama: {articles}
-      <Button primary onClick={ () => articleAdd('Artikel Tambahan')}>Add Article</Button>
-    </div>
+    <Section>
+      <Container>
+        <Button primary onClick={ () => articleAdd('Artikel Tambahan')}>Add Article</Button>
+        List Artikel
+        {articles && 
+          articles.map( (data) => {
+            return <p key={data.id}>{data.title}</p>
+          })
+        }
+      </Container>
+    </Section>
   );
 }
 
@@ -15,9 +30,10 @@ const mapStateToProps = state => {
   return { articles: state.articleReducer.articles };
 };
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
-    articleAdd: article => dispatch(articleAdd(article))
+    articleAdd: article => dispatch(articleAdd(article)),
+    articleFetch: () => dispatch(articleFetch())
   };
 };
 
