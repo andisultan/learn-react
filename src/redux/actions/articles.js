@@ -1,24 +1,43 @@
-export const ARTICLE_REQUESTED = 'ARTICLE_FETCH';
-export const ARTICLE_RECEIVED = 'ARTICLE_ADD';
-export const ARTICLE_FAILED = 'ARTICLE_FAILED';
-
-export const ARTICLE_ADD = 'ARTICLE_ADD';
+export const ARTICLE_FETCH = 'ARTICLE_FETCH';
+export const ARTICLE_FETCH_ERROR = 'ARTICLE_FETCH_ERROR';
+export const ARTICLE_CREATE = 'ARTICLE_CREATE';
+export const ARTICLE_UPDATE = 'ARTICLE_UPDATE';
+export const ARTICLE_DELETE = 'ARTICLE_DELETE';
 
 
 export const articleFetch = () => {
-  return function (dispatch) {
-    dispatch({ type: ARTICLE_REQUESTED });
+  return function(dispatch) {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then(response => response.json())
-      .then(json => { 
-        return dispatch({ type: ARTICLE_RECEIVED, payload: json})
+      .then(response => { 
+        dispatch({ type: ARTICLE_FETCH, payload: response})
       })
-      .catch(error => dispatch({ type: ARTICLE_FAILED, payload: error }));
+      .catch(error => {
+        dispatch({ type: ARTICLE_FETCH_ERROR, payload: error })
+      });
   }
 }
 
-export const articleAdd = (payload) => {
-  return {
-    type: ARTICLE_ADD, payload
+export const articleCreate = (payload) => {
+  return function(dispatch) {
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: payload.title,
+        body: payload.body,
+        userId: 1111,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then(response => { 
+        console.log('response', response);
+        dispatch({ type: ARTICLE_CREATE, payload: response})
+      })
+      .catch(error => {
+        console.log('response', error);
+        dispatch({ type: ARTICLE_FETCH_ERROR, payload: error })
+      });
   }
 }

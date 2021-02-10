@@ -1,41 +1,49 @@
 import { 
-  ARTICLE_REQUESTED,
-  ARTICLE_RECEIVED,
-  ARTICLE_FAILED, 
-  ARTICLE_ADD 
+  ARTICLE_FETCH,
+  ARTICLE_FETCH_ERROR,
+  ARTICLE_CREATE, 
+  ARTICLE_DELETE, 
+  ARTICLE_UPDATE, 
 } from 'redux/actions/articles';
 
 const initialState = {
   loading: true,
   error: '',
-  articles: []
+  data: []
 }
 
 export const articleReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ARTICLE_REQUESTED:
-      return {
-        ...state,
-        loading: true,
-      }
-    case ARTICLE_RECEIVED:
-      console.log('action.payload', action.payload);
+    case ARTICLE_FETCH:
       return {
         ...state,
         loading: false,
-        articles: action.payload
+        error: '',
+        data: action.payload
       }
-    case ARTICLE_FAILED:
+    case ARTICLE_FETCH_ERROR:
       return {
         ...state,
         loading: false,
         error: action.payload
       }
-    case ARTICLE_ADD:
+    case ARTICLE_CREATE:
       return {
         ...state,
         loading: false,
-        articles: state.articles.concat(action.payload)
+        data: state.data.concat(action.payload)
+      }
+    case ARTICLE_UPDATE:
+      return {
+        ...state,
+        loading: false,
+        data: state.data.concat(action.payload)
+      }
+    case ARTICLE_DELETE:
+      return {
+        ...state,
+        loading: false,
+        data: state.data.concat(action.payload)
       }
     default:
       return state;
