@@ -4,6 +4,8 @@ import SiteFooter from "layouts/site-footer";
 
 const SiteWrapper = styled.div`
   overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
 `;
 
 const Main = styled.footer`

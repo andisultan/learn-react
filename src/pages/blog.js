@@ -5,7 +5,7 @@ import Button from 'components/button';
 import Container from 'components/container';
 import Site from 'layouts/site';
 
-import { articleFetch, articleCreate } from 'redux/actions/articles';
+import { articleFetch, articleCreate } from 'redux/actions/article';
 
 const PageBlog = ({ articleFetch, articleCreate, articles }) => {
   

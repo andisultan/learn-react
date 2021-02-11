@@ -4,7 +4,7 @@ import {
   ARTICLE_CREATE, 
   ARTICLE_DELETE, 
   ARTICLE_UPDATE, 
-} from 'redux/actions/articles';
+} from 'redux/actions/article';
 
 const initialState = {
   loading: true,

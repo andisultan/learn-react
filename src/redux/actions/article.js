@@ -9,7 +9,7 @@ export const articleFetch = () => {
   return function(dispatch) {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then(response => response.json())
-      .then(response => { 
+      .then(response => {
         dispatch({ type: ARTICLE_FETCH, payload: response})
       })
       .catch(error => {

@@ -6,6 +6,7 @@ const Header = styled.header`
   background: ${COLOR_PRIMARY};
   padding: 30px 0;
   color: #FFFFFF;
+  text-align: center;
 
   a {
     color: #FFFFFF;
@@ -25,6 +26,8 @@ const SiteHeader = () => {
       <Link to="/">Homepage</Link>
       <Link to="/about">About</Link>
       <Link to="/blog">Blog</Link>
+      <Link to="/product">Product</Link>
+      <Link to="/login">Login</Link>
     </Header>
   )
 }
